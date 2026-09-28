@@ -10,8 +10,14 @@
     document.getElementById("next-title").textContent = next.subject;
     document.getElementById("next-scope").textContent = next.scope;
     const nextLink = document.getElementById("next-material-link");
-    nextLink.href = next.notion || data.links.materials;
-    nextLink.textContent = "Abrir " + next.code + " no Notion ";
+    nextLink.href = "#leitura";
+    nextLink.removeAttribute("target");
+    nextLink.removeAttribute("rel");
+    nextLink.textContent = "Ler " + next.code + " no site ";
+    nextLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (window.PRF_READER) window.PRF_READER.open(next.code, "material");
+    });
     const arrow = document.createElement("span");
     arrow.setAttribute("aria-hidden", "true");
     arrow.textContent = "↗";
@@ -78,6 +84,23 @@
     target.textContent = module.questionTarget === "proposta discursiva" ? "Questões previstas: proposta discursiva + checklist de estrutura." : "Bateria planejada: " + module.questionTarget + " itens.";
     const actions = document.createElement("div");
     actions.className = "module-actions";
+    const readMaterial = document.createElement("button");
+    readMaterial.type = "button";
+    readMaterial.textContent = "Ler material no site";
+    readMaterial.addEventListener("click", function () {
+      if (window.PRF_READER) window.PRF_READER.open(module.code, "material");
+    });
+    actions.appendChild(readMaterial);
+
+    const readQuestions = document.createElement("button");
+    readQuestions.type = "button";
+    readQuestions.className = "secondary";
+    readQuestions.textContent = "Ler questões no site";
+    readQuestions.addEventListener("click", function () {
+      if (window.PRF_READER) window.PRF_READER.open(module.code, "questions");
+    });
+    actions.appendChild(readQuestions);
+
     if (module.notion) {
       const material = document.createElement("a");
       material.href = module.notion;
@@ -109,4 +132,6 @@
     link.textContent = source.label + " ↗";
     sourceList.appendChild(link);
   });
+
+  if (window.PRF_READER) window.PRF_READER.start(data);
 })();
