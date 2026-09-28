@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08192b">
+  <meta name="description" content="Painel pessoal do projeto PRF Administrativo: roda contínua, próxima sessão e materiais no Notion.">
+  <title>PRF Administrativo — Radar + Roda Contínua</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./data.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o painel</a>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="PRF Administrativo, início">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span><b>PRF</b><small>ADMINISTRATIVO</small></span>
+    </a>
+    <nav class="top-nav" aria-label="Navegação principal">
+      <a href="#inicio">Painel</a>
+      <a href="#execucao">Execução</a>
+      <a href="#roda">Roda PRFADM</a>
+      <a href="#fontes">Fontes</a>
+    </nav>
+    <a class="header-notion" href="https://app.notion.com/p/3e8cf5a2673181679cd2f5532e0abf60" target="_blank" rel="noreferrer">
+      <span aria-hidden="true">↗</span> Abrir Notion
+    </a>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" id="inicio" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> RADAR PRÉ-EDITAL <span class="eyebrow-sep">/</span> TRILHA COMPLEMENTAR</div>
+        <h1 id="page-title">PRF Administrativo</h1>
+        <p class="hero-intro">Uma roda contínua, leve e sem datas fixas. O próximo código conduz a sessão.</p>
+        <div class="next-card">
+          <div class="next-card-top">
+            <span class="label">PRÓXIMA SESSÃO DE ESTUDO</span>
+            <span class="day-chip" id="next-day">SEGUNDA</span>
+          </div>
+          <div class="next-content">
+            <div class="next-code" aria-hidden="true">01</div>
+            <div class="next-details">
+              <h2 id="next-title">Informática I</h2>
+              <p id="next-scope">Sistemas operacionais; arquivos, pastas e extensões; noções de hardware e software; atalhos e produtividade.</p>
+            </div>
+          </div>
+          <a class="button button-gold" id="next-material-link" href="https://app.notion.com/p/3e8cf5a26731819d8bf5c5f1f708d808" target="_blank" rel="noreferrer">
+            Abrir PRFADM01 no Notion <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-status" aria-label="Progresso real da roda de estudo">
+        <div class="status-orbit" aria-hidden="true"><span class="orbit-core"></span><span class="orbit-node"></span></div>
+        <div class="hero-status-content">
+          <span class="label label-light">SUA RODA DE ESTUDO</span>
+          <div class="hero-progress"><strong id="study-complete">0</strong><span>/ 33</span></div>
+          <p id="study-round">Volta 1 · nenhum bloco concluído</p>
+          <div class="progress-track" role="progressbar" aria-label="Progresso real da roda" aria-valuenow="0" aria-valuemin="0" aria-valuemax="33">
+            <span id="study-progress-bar" style="width:0%"></span>
+          </div>
+          <p class="status-note">Construir ou revisar material não conta como estudo realizado.</p>
+        </div>
+        <div class="hero-stamp"><span>33</span><small>sessões<br>por volta</small></div>
+      </aside>
+    </section>
+
+    <section class="snapshot shell" aria-label="Estado conferido no Notion">
+      <article class="snapshot-card snapshot-study">
+        <span class="snapshot-icon" aria-hidden="true">↻</span>
+        <div><span class="label">ESTUDO REAL</span><strong>Volta 1 · 0/33</strong><small>Próximo: PRFADM01</small></div>
+      </article>
+      <article class="snapshot-card snapshot-material">
+        <span class="snapshot-icon" aria-hidden="true">▤</span>
+        <div><span class="label">MATERIAIS REVALIDADOS</span><strong>11/33 · próximo editorial PRFADM12</strong><small>Fase MATERIALS · gate 10/10 v2</small></div>
+      </article>
+      <article class="snapshot-card snapshot-questions">
+        <span class="snapshot-icon" aria-hidden="true">✓</span>
+        <div><span class="label">TRILHA DE QUESTÕES</span><strong>0/33 · ainda não iniciada</strong><small>Começa depois de materiais 33/33</small></div>
+      </article>
+    </section>
+
+    <section class="quick-links shell" aria-label="Acesso rápido ao Notion">
+      <a href="https://app.notion.com/p/3e8cf5a267318101bdeec4ed78182897" target="_blank" rel="noreferrer">
+        <span class="quick-symbol" aria-hidden="true">01</span><span><b>Executar sessão</b><small>Fluxo diário e regras de fechamento</small></span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://app.notion.com/p/3e8cf5a267318105a5f5fa52cabf3a3a" target="_blank" rel="noreferrer">
+        <span class="quick-symbol" aria-hidden="true">02</span><span><b>Materiais diários</b><small>Aulas e páginas PRFADM</small></span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://app.notion.com/p/3e8cf5a267318197b509f976a15315d5" target="_blank" rel="noreferrer">
+        <span class="quick-symbol" aria-hidden="true">03</span><span><b>Questões diárias</b><small>Metas, correção e adaptação</small></span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://app.notion.com/p/3e8cf5a2673181ea877eed0117a000f1" target="_blank" rel="noreferrer">
+        <span class="quick-symbol" aria-hidden="true">04</span><span><b>Lei seca e normas</b><small>Referências jurídicas do projeto</small></span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section class="work-grid shell" id="execucao" aria-labelledby="execution-title">
+      <article class="panel session-panel">
+        <div class="section-kicker">COMO RODAR A SESSÃO</div>
+        <h2 id="execution-title">Uma sessão por vez</h2>
+        <p class="panel-lead">Faça o código seguinte na roda. Se faltar um dia, retome o mesmo código na próxima sessão.</p>
+        <ol class="session-steps">
+          <li><span>1</span><div><b>Leia ou revise</b><small>Profundidade ajustada ao seu domínio atual.</small></div></li>
+          <li><span>2</span><div><b>Resolva sem consulta</b><small>Abra a correção somente depois de responder.</small></div></li>
+          <li><span>3</span><div><b>Corrija e registre</b><small>Leve ao caderno apenas erro reaplicável, regra crítica ou reincidência.</small></div></li>
+          <li><span>4</span><div><b>Feche e avance</b><small>No PRFADM33, volte ao PRFADM01 para outra volta completa.</small></div></li>
+        </ol>
+        <a class="text-link" href="https://app.notion.com/p/3e8cf5a267318101bdeec4ed78182897" target="_blank" rel="noreferrer">Ver execução diária completa <span aria-hidden="true">↗</span></a>
+      </article>
+
+      <article class="panel rhythm-panel">
+        <div class="section-kicker">CADÊNCIA SEMANAL</div>
+        <h2>Segunda, quarta e sexta</h2>
+        <p class="panel-lead">A cadência mostra quando estudar; a posição na roda decide qual matéria vem.</p>
+        <div class="weekday-row" aria-label="Dias previstos para a PRF">
+          <span><b>SEG</b><small>próximo código</small></span>
+          <span><b>QUA</b><small>continua a roda</small></span>
+          <span><b>SEX</b><small>sem pular bloco</small></span>
+        </div>
+        <div class="rule-callout">
+          <span class="rule-icon" aria-hidden="true">↗</span>
+          <p>São <b>33 sessões por volta, não 33 dias</b>. Conteúdo forte ou recente em SEEDF, TJDFT ou TCE-GO pode encurtar a teoria; não remove o PRFADM da sequência.</p>
+        </div>
+        <div class="load-title">Carga-base por domínio</div>
+        <div class="load-list">
+          <div><span>Forte / recente</span><b>35–45 min</b><small>revisão objetiva + questões + erros</small></div>
+          <div><span>Intermediário</span><b>45–60 min</b><small>teoria dirigida + questões</small></div>
+          <div><span>Fraco / esquecido</span><b>60–75 min</b><small>teoria completa + questões + caderno</small></div>
+        </div>
+        <p class="fine-print">São referências de planejamento. O tempo real só entra no histórico quando for medido ou informado.</p>
+      </article>
+    </section>
+
+    <section class="rotation-section shell" id="roda" aria-labelledby="rotation-title">
+      <div class="rotation-heading">
+        <div>
+          <div class="section-kicker">A SEQUÊNCIA COMPLETA</div>
+          <h2 id="rotation-title">Roda PRFADM01–33</h2>
+          <p>Ordem contínua, sem calendário por datas. Abra um código para ver o recorte e o material correspondente.</p>
+        </div>
+        <div class="rotation-mark"><strong>33</strong><span>blocos<br>na volta</span></div>
+      </div>
+      <div class="editorial-note">
+        <span class="editorial-icon" aria-hidden="true">i</span>
+        <p><b>Esteira editorial e estudo real são controles diferentes.</b> Onze materiais passaram pelo gate editorial 10/10 v2. Isso não altera sua roda de estudo, que permanece em 0/33. As questões serão construídas depois que os 33 materiais forem concluídos.</p>
+        <a href="https://app.notion.com/p/3e8cf5a2673181848c45ff9eb5095239" target="_blank" rel="noreferrer">Abrir checkpoint editorial <span aria-hidden="true">↗</span></a>
+      </div>
+      <ol class="module-grid" id="rotation-list" aria-label="Sequência completa de matérias PRFADM">
+        <li class="loading-state">Carregando a roda…</li>
+      </ol>
+    </section>
+
+    <section class="sources-section shell" id="fontes" aria-labelledby="sources-title">
+      <div class="sources-panel">
+        <div class="sources-copy">
+          <div class="section-kicker">RADAR PRÉ-EDITAL</div>
+          <h2 id="sources-title">Referências, não edital</h2>
+          <p>A projeção combina PF Administrativo 2025, PCDF Administrativo 2024 e o histórico da PRF. Quando sair, o edital oficial da PRF passa a ser a fonte principal e a roda deverá ser recalibrada.</p>
+          <div class="source-links" id="source-list">
+            <a href="https://www.gov.br/prf/pt-br/acesso-a-informacao/servidores/concursos-e-selecoes/editais-anteriores" target="_blank" rel="noreferrer">Concursos anteriores da PRF ↗</a>
+            <a href="https://cdn.cebraspe.org.br/concursos/pf_25_adm/arquivos/Ed_1_2025_PF_Administrativo_Abertura_atualizado_ret_5.pdf" target="_blank" rel="noreferrer">Edital PF Administrativo 2025 ↗</a>
+            <a href="https://cdn.cebraspe.org.br/concursos/pc_df_24_adm/arquivos/ED_1_PCDF_ADM_2024_ABERTURA.PDF" target="_blank" rel="noreferrer">Edital PCDF Administrativo 2024 ↗</a>
+          </div>
+        </div>
+        <div class="source-side">
+          <div class="source-shield" aria-hidden="true"><span>PRF</span><i></i></div>
+          <p>O conteúdo de 2014 serve como referência histórica. Norma vigente e futuro edital prevalecem.</p>
+          <a class="button button-outline" href="https://app.notion.com/p/3e8cf5a2673181679cd2f5532e0abf60" target="_blank" rel="noreferrer">Abrir Radar no Notion <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-row shell" aria-label="Ferramentas do projeto">
+      <div><span class="tool-icon" aria-hidden="true">⌕</span><span><b>Plataforma de Questões</b><small>Ferramenta separada; resultados não entram automaticamente neste painel.</small></span></div>
+      <a href="https://plataforma-questoes-rodrigo.rodrigo-lzavsj-rr.chatgpt.site" target="_blank" rel="noreferrer">Abrir plataforma <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span>PRF Administrativo · Radar + Roda Contínua</span>
+      <span>Estado conferido no Notion em <time datetime="2026-09-28">28 set 2026</time></span>
+      <a href="https://app.notion.com/p/3e8cf5a2673181679cd2f5532e0abf60" target="_blank" rel="noreferrer">Notion é a fonte de verdade ↗</a>
+    </div>
+  </footer>
+</body>
+</html>
