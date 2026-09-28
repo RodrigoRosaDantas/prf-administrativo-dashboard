@@ -1,6 +1,13 @@
 name: Sync PRF ADM content from Notion
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "data.js"
+      - "scripts/sync-notion.mjs"
+      - ".github/workflows/sync-notion.yml"
   schedule:
     - cron: "15 10 * * *"
   workflow_dispatch:
