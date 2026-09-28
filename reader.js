@@ -315,6 +315,8 @@
     const materialCount = snapshot && Array.isArray(snapshot.materials) ? snapshot.materials.filter(function (item) { return Array.isArray(item.blocks) && item.blocks.length; }).length : 0;
     const questionCount = snapshot && Array.isArray(snapshot.questionPages) ? snapshot.questionPages.length : 0;
     const syncedAt = snapshot && formatDate(snapshot.syncedAt);
+    const lastSync = element("sync-last-updated");
+    if (lastSync) lastSync.textContent = syncedAt ? "Última sincronização: " + syncedAt : "Última sincronização indisponível";
     status.textContent = syncedAt
       ? "Sincronizado em " + syncedAt + " · " + materialCount + "/33 páginas com material · " + questionCount + " páginas de questões"
       : "Aguardando a conexão segura com o Notion.";
@@ -325,8 +327,11 @@
     if (!project) return;
     select.value = code;
     setMode(nextMode);
+    if (window.PRF_VIEWS) window.PRF_VIEWS.show("leitura");
     const section = element("leitura");
-    if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (section) window.requestAnimationFrame(function () {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   window.PRF_READER = { start: start, open: open };

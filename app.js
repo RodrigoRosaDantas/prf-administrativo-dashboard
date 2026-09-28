@@ -1,9 +1,56 @@
 (function () {
   "use strict";
+  function setupViews() {
+    const panels = Array.from(document.querySelectorAll("[data-view-panel]"));
+    const links = Array.from(document.querySelectorAll("[data-view-link]"));
+    if (!panels.length) return;
+
+    function show(name, options) {
+      const panel = panels.find(function (candidate) { return candidate.dataset.viewPanel === name; });
+      if (!panel) return false;
+      const settings = options || {};
+      panels.forEach(function (candidate) { candidate.hidden = candidate !== panel; });
+      links.forEach(function (link) {
+        if (link.dataset.viewLink === name) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+      document.body.dataset.currentView = name;
+      if (settings.updateHash && window.location.hash !== "#" + name) {
+        window.history.pushState({ view: name }, "", "#" + name);
+      }
+      if (settings.scroll) window.scrollTo({ top: 0, behavior: "smooth" });
+      return true;
+    }
+
+    links.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        show(link.dataset.viewLink, { updateHash: true, scroll: true });
+      });
+    });
+    window.addEventListener("popstate", function () {
+      show(window.location.hash.slice(1) || "inicio", { scroll: true });
+    });
+    show(window.location.hash.slice(1) || "inicio");
+    window.PRF_VIEWS = { show: function (name) { show(name, { updateHash: true, scroll: true }); } };
+  }
+
+  setupViews();
+
   const data = window.PRF_DATA;
   if (!data || !Array.isArray(data.modules)) return;
 
   const byCode = new Map(data.modules.map(function (module) { return [module.code, module]; }));
+  const studySummary = document.getElementById("snapshot-study-summary");
+  const studyNext = document.getElementById("snapshot-study-next");
+  const materialSummary = document.getElementById("snapshot-materials-summary");
+  const materialNext = document.getElementById("snapshot-materials-next");
+  const questionSummary = document.getElementById("snapshot-questions-summary");
+  if (studySummary) studySummary.textContent = "Volta " + data.execution.round + " · " + data.execution.completed + "/" + data.modules.length;
+  if (studyNext) studyNext.textContent = "Próximo: " + data.execution.next;
+  if (materialSummary) materialSummary.textContent = data.editorial.completed + "/" + data.modules.length + " materiais revalidados";
+  if (materialNext) materialNext.textContent = "Próximo editorial: " + data.editorial.next + " · gate " + data.editorial.gate;
+  if (questionSummary) questionSummary.textContent = data.editorial.questionsCompleted + "/" + data.modules.length + (data.editorial.questionsCompleted ? " concluídas" : " · ainda não iniciada");
   const next = byCode.get(data.execution.next);
   if (next) {
     document.getElementById("next-day").textContent = next.cadence.toUpperCase();

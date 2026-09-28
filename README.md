@@ -16,7 +16,7 @@ O GitHub Actions lê as páginas do Notion e grava um snapshot estático em `con
 3. No GitHub, abra **Settings → Secrets and variables → Actions → New repository secret** e salve o token com o nome `PRF_ADM_GITHUB`. O workflow também aceita `NOTION_TOKEN`.
 4. Execute **Actions → Sync PRF ADM content from Notion → Run workflow** para a primeira carga.
 
-Depois disso, a sincronização roda diariamente às 07h15 no horário de Brasília. Alterações sincronizadas são publicadas no repositório e no Pages. Como este repositório e o site são públicos, o texto sincronizado também fica público.
+Depois disso, a sincronização roda diariamente às 07h15 no horário de Brasília. O botão **Atualizar agora** no site abre esse mesmo workflow no GitHub Actions; por segurança, confirme a execução clicando em **Run workflow**. Ao concluir a leitura do Notion, o site é republicado automaticamente. Como este repositório e o site são públicos, o texto sincronizado também fica público.
 
 ## Estado atual das questões
 
