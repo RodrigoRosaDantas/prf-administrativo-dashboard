@@ -13,7 +13,7 @@ O GitHub Actions lê as páginas do Notion e grava um snapshot estático em `con
 
 1. No Notion, crie uma conexão interna com a permissão **Read content only** e sem acesso a informações de usuários.
 2. Compartilhe com essa conexão as páginas **Materiais diários | PRF Administrativo** e **Questões diárias | PRF Administrativo**. Se a API não conseguir ler uma subpágina, conecte também a página correspondente.
-3. No GitHub, abra **Settings → Secrets and variables → Actions → New repository secret** e salve o token com o nome `NOTION_TOKEN`.
+3. No GitHub, abra **Settings → Secrets and variables → Actions → New repository secret** e salve o token com o nome `PRF_ADM_GITHUB`. O workflow também aceita `NOTION_TOKEN`.
 4. Execute **Actions → Sync PRF ADM content from Notion → Run workflow** para a primeira carga.
 
 Depois disso, a sincronização roda diariamente às 07h15 no horário de Brasília. Alterações sincronizadas são publicadas no repositório e no Pages. Como este repositório e o site são públicos, o texto sincronizado também fica público.
