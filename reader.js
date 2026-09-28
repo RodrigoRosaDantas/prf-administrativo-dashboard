@@ -315,6 +315,7 @@
     const materialCount = snapshot && Array.isArray(snapshot.materials) ? snapshot.materials.filter(function (item) { return Array.isArray(item.blocks) && item.blocks.length; }).length : 0;
     const questionCount = snapshot && Array.isArray(snapshot.questionPages) ? snapshot.questionPages.length : 0;
     const syncedAt = snapshot && formatDate(snapshot.syncedAt);
+    if (window.PRF_DASHBOARD) window.PRF_DASHBOARD.updateState(snapshot && snapshot.projectState ? snapshot.projectState : null);
     const lastSync = element("sync-last-updated");
     if (lastSync) lastSync.textContent = syncedAt ? "Última sincronização: " + syncedAt : "Última sincronização indisponível";
     status.textContent = syncedAt

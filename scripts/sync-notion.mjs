@@ -163,6 +163,102 @@ async function listAllChildren(parentId, depth = 0) {
   return blocks;
 }
 
+function plainTextFromBlocks(blocks) {
+  const lines = [];
+  for (const block of blocks || []) {
+    const parts = [];
+    if (block.title) parts.push(String(block.title));
+    if (Array.isArray(block.rich_text)) {
+      for (const part of block.rich_text) if (part.text) parts.push(part.text);
+    }
+    if (Array.isArray(block.cells)) {
+      for (const cell of block.cells) {
+        for (const part of cell || []) if (part.text) parts.push(part.text);
+      }
+    }
+    if (parts.length) lines.push(parts.join(""));
+    if (block.children?.length) lines.push(plainTextFromBlocks(block.children));
+  }
+  return lines.filter(Boolean).join("\n");
+}
+
+function requiredMatch(text, pattern, label) {
+  const match = text.match(pattern);
+  if (!match) throw new Error("Não foi possível interpretar " + label + " no Notion.");
+  return match;
+}
+
+function parseExecutionState(blocks) {
+  const text = plainTextFromBlocks(blocks);
+  const round = Number(requiredMatch(text, /Volta atual:\s*(?:Volta\s*)?(\d+)/i, "a volta atual")[1]);
+  const progress = requiredMatch(text, /Progresso:\s*(\d+)\s*\/\s*(\d+)/i, "o progresso real");
+  const completed = Number(progress[1]);
+  const total = Number(progress[2]);
+  const nextMatch = requiredMatch(text, /Próximo:\s*(PRFADM\d{2}|nenhum)/i, "a próxima sessão");
+  const lastMatch = requiredMatch(text, /Último concluído:\s*(PRFADM\d{2}|nenhum)/i, "a última sessão concluída");
+  const next = /^nenhum$/i.test(nextMatch[1]) ? null : nextMatch[1].toUpperCase();
+  const lastCompleted = /^nenhum$/i.test(lastMatch[1]) ? null : lastMatch[1].toUpperCase();
+  const moduleCodes = new Set(dataSource.modules.map(module => module.code));
+
+  if (!Number.isInteger(round) || round < 1 || !Number.isInteger(completed) || completed < 0 || completed > total || total !== dataSource.modules.length) {
+    throw new Error("O progresso real do Notion está fora dos limites esperados.");
+  }
+  if ((next && !moduleCodes.has(next)) || (lastCompleted && !moduleCodes.has(lastCompleted))) {
+    throw new Error("O Notion indica um código PRFADM que não existe na roda.");
+  }
+  return { round, completed, total, next, lastCompleted };
+}
+
+function parseEditorialState(blocks) {
+  const text = plainTextFromBlocks(blocks);
+  const stageMatch = requiredMatch(text, /Stage:\s*(MATERIALS|QUESTIONS|COMPLETE)/i, "a etapa editorial");
+  const activeMatch = requiredMatch(text, /Active:\s*(PRFADM\d{2}|none)/i, "o PRFADM editorial ativo");
+  const nextMatch = requiredMatch(text, /Next:\s*(PRFADM\d{2}|none)/i, "o próximo PRFADM editorial");
+  const materials = requiredMatch(text, /Materials complete:\s*(\d+)\s*\/\s*(\d+)/i, "o progresso dos materiais");
+  const questions = requiredMatch(text, /Questions complete:\s*(\d+)\s*\/\s*(\d+)/i, "o progresso das questões");
+  const statusMatch = requiredMatch(text, /Status:\s*(READY|BLOCKED|COMPLETE)/i, "o status editorial");
+  const gateMatch = requiredMatch(text, /Quality gate:\s*([^\r\n]+)/i, "o gate de qualidade");
+  const totalMaterials = Number(materials[2]);
+  const totalQuestions = Number(questions[2]);
+  const materialsCompleted = Number(materials[1]);
+  const questionsCompleted = Number(questions[1]);
+  const active = /^none$/i.test(activeMatch[1]) ? null : activeMatch[1].toUpperCase();
+  const next = /^none$/i.test(nextMatch[1]) ? null : nextMatch[1].toUpperCase();
+  const moduleCodes = new Set(dataSource.modules.map(module => module.code));
+
+  if (stageMatch[1].toUpperCase() === "MATERIALS" && totalMaterials !== dataSource.modules.length) {
+    throw new Error("O total de materiais do Notion não corresponde à roda PRFADM.");
+  }
+  if (totalQuestions !== dataSource.modules.length || materialsCompleted > totalMaterials || questionsCompleted > totalQuestions) {
+    throw new Error("O progresso editorial do Notion está fora dos limites esperados.");
+  }
+  if ((active && !moduleCodes.has(active)) || (next && !moduleCodes.has(next))) {
+    throw new Error("O checkpoint indica um código PRFADM que não existe na roda.");
+  }
+
+  return {
+    stage: stageMatch[1].toUpperCase(),
+    active,
+    next,
+    materialsCompleted,
+    materialsTotal: totalMaterials,
+    questionsCompleted,
+    questionsTotal: totalQuestions,
+    editorialStatus: statusMatch[1].toUpperCase(),
+    gate: gateMatch[1].trim()
+  };
+}
+
+async function optionalProjectState(url, label, parser) {
+  try {
+    const blocks = await listAllChildren(idFromNotionUrl(url));
+    return { status: "available", ...parser(blocks) };
+  } catch (_) {
+    console.warn("Estado do Notion indisponível para " + label + "; a sincronização de materiais e questões continuará.");
+    return { status: "unavailable" };
+  }
+}
+
 function collectQuestionPages(blocks, pages = []) {
   for (const block of blocks || []) {
     if (block.type === "child_page") {
@@ -196,18 +292,28 @@ const questionsPageId = idFromNotionUrl(dataSource.links.questions);
 const questionGuide = await listAllChildren(questionsPageId);
 const questionPages = collectQuestionPages(questionGuide);
 
+const contentBlockCount = fetchedBlockCount;
+const executionState = await optionalProjectState(dataSource.links.execution, "execução", parseExecutionState);
+const editorialState = await optionalProjectState(dataSource.links.checkpoint, "esteira editorial", parseEditorialState);
+const syncedAt = new Date().toISOString();
+
 const output = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   source: "Notion API",
-  syncedAt: new Date().toISOString(),
+  syncedAt,
   snapshotAsOf: dataSource.asOf,
   moduleCount: materials.length,
-  materialBlockCount: fetchedBlockCount,
+  contentBlockCount,
   materials,
   questionGuide,
-  questionPages
+  questionPages,
+  projectState: {
+    syncedAt,
+    execution: executionState,
+    editorial: editorialState
+  }
 };
 
 await mkdir(dirname(OUTPUT_PATH), { recursive: true });
 await writeFile(OUTPUT_PATH, `${JSON.stringify(output, null, 2)}\n`, "utf8");
-console.log(`Sincronização concluída: ${materials.length} materiais; ${questionPages.length} páginas de questões; ${fetchedBlockCount} blocos.`);
+console.log(`Sincronização concluída: ${materials.length} materiais; ${questionPages.length} páginas de questões; ${contentBlockCount} blocos de conteúdo; estado de estudo ${executionState.status}; esteira editorial ${editorialState.status}.`);

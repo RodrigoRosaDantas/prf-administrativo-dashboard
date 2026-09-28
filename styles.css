@@ -63,6 +63,13 @@ h1 { margin: 12px 0 6px; color: var(--navy-950); font-size: clamp(34px, 4.7vw, 5
 .button:hover { transform: translateY(-1px); }
 .button-gold { color: var(--navy-950); background: var(--gold-500); }
 .button-gold:hover { background: #ffd574; }
+.button-secondary { color: var(--navy-900); background: var(--blue-100); border: 1px solid #d4e3ed; }
+.button-secondary:hover { background: #d9eaf4; }
+.next-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.next-hint { margin: 9px 0 0; color: var(--muted); font-size: 11px; }
+.project-state-status { margin-top: 10px; margin-bottom: 0; padding: 0 2px; color: var(--muted); font-size: 12px; }
+.project-state-status[data-state="ok"] { color: #23634f; }
+.project-state-status[data-state="warning"] { color: #79590f; }
 .hero-status { position: relative; display: flex; align-items: center; min-height: 308px; overflow: hidden; isolation: isolate; padding: 28px; border-radius: 18px; color: white; background: radial-gradient(circle at 87% 12%, #234c68 0, transparent 37%), linear-gradient(135deg, #112b42 0%, #08192b 76%); box-shadow: 0 18px 38px rgba(7, 21, 35, .18); }
 .hero-status::after { content: ""; position: absolute; z-index: -1; inset: 0; background-image: radial-gradient(rgba(255,255,255,.14) .7px, transparent .7px); background-size: 17px 17px; opacity: .28; mask-image: linear-gradient(130deg, transparent 20%, #000 80%); }
 .hero-status-content { z-index: 1; width: 100%; max-width: 245px; }
