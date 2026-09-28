@@ -316,7 +316,7 @@
     const questionCount = snapshot && Array.isArray(snapshot.questionPages) ? snapshot.questionPages.length : 0;
     const syncedAt = snapshot && formatDate(snapshot.syncedAt);
     status.textContent = syncedAt
-      ? "Sincronizado em " + syncedAt + " · " + materialCount + "/33 materiais · " + questionCount + " páginas de questões"
+      ? "Sincronizado em " + syncedAt + " · " + materialCount + "/33 páginas com material · " + questionCount + " páginas de questões"
       : "Aguardando a conexão segura com o Notion.";
     renderCurrent();
   }
