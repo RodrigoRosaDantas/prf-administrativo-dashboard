@@ -3,13 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#08192b">
+  <meta name="theme-color" content="#071523">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/prf-adm-192.png">
+  <link rel="apple-touch-icon" href="./icons/prf-adm-192.png">
   <meta name="description" content="Painel PRF Administrativo com roda contínua e leitura dos materiais e questões sincronizados do Notion.">
   <title>PRF Administrativo — Radar + Roda Contínua</title>
   <link rel="stylesheet" href="./styles.css">
   <script src="./data.js" defer></script>
   <script src="./reader.js" defer></script>
   <script src="./app.js" defer></script>
+  <script src="./pwa.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Pular para o painel</a>
@@ -104,6 +110,18 @@
         <span class="quick-symbol" aria-hidden="true">04</span><span><b>Lei seca e normas</b><small>Referências jurídicas do projeto</small></span><span class="arrow" aria-hidden="true">↗</span>
       </a>
     </section>
+      <aside class="install-banner shell" aria-label="Instalar PRF Administrativo como aplicativo">
+        <span class="install-banner-icon" aria-hidden="true">↓</span>
+        <span class="install-banner-copy">
+          <strong>Instale o PRF ADM no Android</strong>
+          <small id="pwa-install-status" aria-live="polite">Use o Chrome para adicionar à tela inicial. O último material aberto pode ficar disponível sem conexão.</small>
+        </span>
+        <button type="button" class="button" id="install-app-button" hidden>Instalar app</button>
+        <details class="install-steps" id="install-steps">
+          <summary>Como instalar</summary>
+          <p>No Chrome para Android, toque no menu ⋮ e escolha “Instalar app” ou “Adicionar à tela inicial”. Se o Chrome liberar a instalação direta, o botão <b>Instalar app</b> aparece aqui.</p>
+        </details>
+      </aside>
       <p class="sync-note shell"><span class="sync-note-dot" aria-hidden="true"></span><span><strong id="sync-last-updated">Última sincronização: aguardando a primeira leitura</strong><small>Atualização automática diária às 07h15 (Brasília). Para atualizar agora, abra o GitHub Actions e clique em <b>Run workflow</b>; o site será republicado ao concluir.</small></span></p>
     </div>
 

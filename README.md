@@ -18,6 +18,12 @@ O GitHub Actions lê as páginas do Notion e grava um snapshot estático em `con
 
 Depois disso, a sincronização roda diariamente às 07h15 no horário de Brasília. O botão **Atualizar agora** no site abre esse mesmo workflow no GitHub Actions; por segurança, confirme a execução clicando em **Run workflow**. Ao concluir a leitura do Notion, o site é republicado automaticamente. Como este repositório e o site são públicos, o texto sincronizado também fica público.
 
+## Instalar no Android
+
+Abra o [painel PRF ADM](https://rodrigorosadantas.github.io/prf-administrativo-dashboard/) no Chrome do Android. Quando o Chrome oferecer a instalação, use **Instalar app** no painel. Se o botão não aparecer, abra o menu **⋮** do Chrome e escolha **Instalar app** ou **Adicionar à tela inicial**.
+
+O site abre em modo de aplicativo, com ícone próprio. Depois que a interface e um material forem carregados, eles ficam disponíveis no cache para leitura sem conexão. A sincronização com o Notion e a atualização manual pelo GitHub Actions exigem internet.
+
 ## Estado atual das questões
 
 O Notion registra a trilha de questões em 0/33 e prevê iniciá-la depois que os materiais chegarem a 33/33. Enquanto isso, o leitor mostra as regras da trilha e informa quando ainda não existe bateria para o código; ele não inventa questões ou gabaritos.

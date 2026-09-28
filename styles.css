@@ -380,3 +380,34 @@ h1 { margin: 12px 0 6px; color: var(--navy-950); font-size: clamp(34px, 4.7vw, 5
   .header-sync { gap: 4px; }
   .brand { gap: 7px; }
 }
+
+
+/* Instalação e uso como app no Android. */
+.install-banner {
+  display: grid; grid-template-columns: 42px minmax(0,1fr) auto auto;
+  align-items: center; gap: 12px; margin-top: 14px; margin-bottom: 14px;
+  padding: 11px 14px; border: 1px solid #dce5eb; border-radius: 12px; background: #fff;
+  box-shadow: 0 7px 20px rgba(10,35,54,.035);
+}
+.install-banner [hidden] { display: none !important; }
+.install-banner-icon {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 11px;
+  color: var(--navy-950); background: var(--gold-100); font-size: 24px; font-weight: 850;
+}
+.install-banner-copy { display: grid; gap: 1px; min-width: 0; }
+.install-banner-copy strong { color: var(--navy-900); font-size: 13px; }
+.install-banner-copy small { color: var(--muted); font-size: 11px; line-height: 1.4; }
+#install-app-button { border: 0; color: var(--navy-950); background: var(--gold-500); cursor: pointer; }
+#install-app-button:hover { background: #ffd574; }
+.install-steps { position: relative; }
+.install-steps summary { color: var(--blue-600); cursor: pointer; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.install-steps p { grid-column: 1/-1; max-width: 76ch; margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+@media (max-width: 680px) {
+  .install-banner { grid-template-columns: 36px minmax(0,1fr) auto; gap: 9px; padding: 10px; }
+  .install-banner-icon { width: 34px; height: 34px; font-size: 21px; }
+  .install-banner-copy strong { font-size: 12px; }
+  .install-banner-copy small { font-size: 10px; }
+  .install-steps { grid-column: 2/-1; }
+  .install-steps p { font-size: 10px; }
+  #install-app-button { min-height: 35px; padding: 7px 9px; font-size: 11px; }
+}
