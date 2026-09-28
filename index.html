@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08192b">
-  <meta name="description" content="Painel pessoal do projeto PRF Administrativo: roda contínua, próxima sessão e materiais no Notion.">
+  <meta name="description" content="Painel PRF Administrativo com roda contínua e leitura dos materiais e questões sincronizados do Notion.">
   <title>PRF Administrativo — Radar + Roda Contínua</title>
   <link rel="stylesheet" href="./styles.css">
   <script src="./data.js" defer></script>
+  <script src="./reader.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -20,6 +21,7 @@
     <nav class="top-nav" aria-label="Navegação principal">
       <a href="#inicio">Painel</a>
       <a href="#execucao">Execução</a>
+      <a href="#leitura">Leitura</a>
       <a href="#roda">Roda PRFADM</a>
       <a href="#fontes">Fontes</a>
     </nav>
@@ -95,6 +97,29 @@
       <a href="https://app.notion.com/p/3e8cf5a2673181ea877eed0117a000f1" target="_blank" rel="noreferrer">
         <span class="quick-symbol" aria-hidden="true">04</span><span><b>Lei seca e normas</b><small>Referências jurídicas do projeto</small></span><span class="arrow" aria-hidden="true">↗</span>
       </a>
+    </section>
+
+    <section class="reader-section shell" id="leitura" aria-labelledby="reader-title">
+      <div class="reader-heading">
+        <div>
+          <div class="section-kicker">BIBLIOTECA PRFADM</div>
+          <h2 id="reader-title">Leia o conteúdo no site</h2>
+          <p>Escolha um código da roda e alterne entre o material e as questões disponíveis no Notion.</p>
+        </div>
+        <p class="reader-sync-status" id="reader-sync-status" aria-live="polite">Preparando a leitura…</p>
+      </div>
+      <div class="reader-toolbar">
+        <label for="reader-module">Sessão</label>
+        <select id="reader-module" aria-label="Escolha a sessão PRFADM"></select>
+        <div class="reader-tabs" role="group" aria-label="Tipo de conteúdo">
+          <button type="button" class="is-active" id="reader-material-tab" aria-pressed="true">Material</button>
+          <button type="button" id="reader-questions-tab" aria-pressed="false">Questões</button>
+        </div>
+        <a class="reader-source-link" id="reader-notion-link" href="https://app.notion.com/p/3e8cf5a267318105a5f5fa52cabf3a3a" target="_blank" rel="noreferrer">Abrir no Notion ↗</a>
+      </div>
+      <article class="reader-content" id="reader-content" aria-live="polite" aria-busy="true">
+        <p class="reader-empty">Carregando conteúdo sincronizado…</p>
+      </article>
     </section>
 
     <section class="work-grid shell" id="execucao" aria-labelledby="execution-title">
