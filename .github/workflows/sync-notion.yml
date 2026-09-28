@@ -16,7 +16,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     env:
-      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      NOTION_TOKEN: ${{ secrets.PRF_ADM_GITHUB || secrets.NOTION_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -26,7 +26,7 @@ jobs:
           node-version: "22"
       - name: Skip until the Notion secret is configured
         if: ${{ env.NOTION_TOKEN == '' }}
-        run: echo "Configure NOTION_TOKEN in repository Actions secrets to enable the Notion sync."
+        run: echo "Configure PRF_ADM_GITHUB in repository Actions secrets to enable the Notion sync."
       - name: Read Notion materials and questions
         if: ${{ env.NOTION_TOKEN != '' }}
         run: node scripts/sync-notion.mjs
