@@ -6,7 +6,7 @@
     "kind": "public-project-state",
     "ref": "content/prf-notion.json#projectState",
     "status": "synced",
-    "updatedAt": "2026-09-29T13:43:10.655Z"
+    "updatedAt": "2026-09-29T16:30:55.441Z"
   },
   "state": {
     "phase": "Roda contínua PRF Administrativo",
@@ -19,7 +19,7 @@
   "study": {
     "evidence": "confirmed",
     "sourceRef": "content/prf-notion.json#projectState.execution",
-    "updatedAt": "2026-09-29T13:43:10.655Z",
+    "updatedAt": "2026-09-29T16:30:55.441Z",
     "trail": "Roda PRFADM",
     "lastCompletedUnit": null,
     "nextUnit": "PRFADM01",
@@ -36,7 +36,7 @@
     "totalSessions": 33,
     "notes": [
       "Materiais: 33/33",
-      "Questões editoriais: 14/33",
+      "Questões editoriais: 16/33",
       "Gate editorial: PRFADM 10/10 v2"
     ]
   }
