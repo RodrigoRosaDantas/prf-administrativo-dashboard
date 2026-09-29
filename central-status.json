@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "projectId": "prf-adm",
+  "publishedAt": "2026-09-29",
+  "source": {
+    "kind": "public-project-state",
+    "ref": "content/prf-notion.json#projectState",
+    "status": "partial",
+    "updatedAt": null
+  },
+  "state": {
+    "phase": "Roda contínua PRF Administrativo",
+    "cycle": "PRFADM01–PRFADM33",
+    "currentUnit": null,
+    "nextAction": null,
+    "nextActionKind": "manual",
+    "alerts": [
+      "Aguardando regeneração pelo sync do Notion."
+    ]
+  },
+  "study": {
+    "evidence": "unavailable",
+    "sourceRef": "content/prf-notion.json#projectState.execution",
+    "updatedAt": null,
+    "trail": "Roda PRFADM",
+    "lastCompletedUnit": null,
+    "nextUnit": null,
+    "lastStudiedAt": null,
+    "questionsDone": null,
+    "correct": null,
+    "errors": null,
+    "doubts": null,
+    "accuracy": null,
+    "reviewsDue": null,
+    "nextReviewAt": null,
+    "activeErrors": null,
+    "completedSessions": null,
+    "totalSessions": 33,
+    "notes": []
+  }
+}

@@ -18,6 +18,10 @@ O GitHub Actions lê as páginas do Notion e grava um snapshot estático em `con
 
 Depois disso, a sincronização roda diariamente às 07h15 no horário de Brasília. O botão **Atualizar agora** no site abre esse mesmo workflow no GitHub Actions; por segurança, confirme a execução clicando em **Run workflow**. Ao concluir a leitura do Notion, o site é republicado automaticamente. Como este repositório e o site são públicos, o texto sincronizado também fica público.
 
+### Contrato para a Central de Estudos
+
+A mesma sincronização gera `central-status.json` a partir de `content/prf-notion.json`. Esse contrato publica somente estado sanitizado necessário à Central: volta atual, última sessão concluída, próxima sessão, contagem de sessões e estado editorial resumido. A Central lê esse arquivo por GET; ela não consulta o Notion diretamente e não recebe o token `PRF_ADM_GITHUB`.
+
 ## Instalar no Android
 
 Abra o [painel PRF ADM](https://rodrigorosadantas.github.io/prf-administrativo-dashboard/) no Chrome do Android. Quando o Chrome oferecer a instalação, use **Instalar app** no painel. Se o botão não aparecer, abra o menu **⋮** do Chrome e escolha **Instalar app** ou **Adicionar à tela inicial**.
