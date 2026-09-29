@@ -45,7 +45,7 @@
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
-      navigator.serviceWorker.register("./sw.js").catch(function () {
+      navigator.serviceWorker.register("./sw.js?v=20260929-questions-stage").catch(function () {
         if (installStatus) installStatus.textContent = "Instale pelo menu ⋮ do Chrome. O modo offline ficará disponível depois que o cache for configurado.";
       });
     });
