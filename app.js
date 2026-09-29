@@ -46,6 +46,7 @@
   const materialSummary = document.getElementById("snapshot-materials-summary");
   const materialNext = document.getElementById("snapshot-materials-next");
   const questionSummary = document.getElementById("snapshot-questions-summary");
+  const questionNext = document.getElementById("snapshot-questions-next");
   const projectStateStatus = document.getElementById("project-state-status");
   const editorialCopy = document.getElementById("editorial-state-copy");
   const nextButton = document.getElementById("next-material-link");
@@ -177,6 +178,11 @@
       questionSummary.textContent = stage === "MATERIALS" && questionsCompleted === 0
         ? progress + " · ainda não iniciada"
         : progress + (stage === "COMPLETE" ? " concluídas" : " concluídas · " + (stage === "QUESTIONS" ? "em andamento" : "aguardando materiais"));
+    }
+    if (questionNext) {
+      if (stage === "MATERIALS") questionNext.textContent = "Começa depois dos materiais 33/33";
+      else if (stage === "QUESTIONS") questionNext.textContent = "Próximo bloco: " + (next || "nenhum");
+      else questionNext.textContent = "Trilha de questões concluída";
     }
     refreshModuleIndicators();
     renderEditorialCopy();
