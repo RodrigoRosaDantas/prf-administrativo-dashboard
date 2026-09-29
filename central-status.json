@@ -5,26 +5,24 @@
   "source": {
     "kind": "public-project-state",
     "ref": "content/prf-notion.json#projectState",
-    "status": "partial",
-    "updatedAt": null
+    "status": "synced",
+    "updatedAt": "2026-09-29T13:43:10.655Z"
   },
   "state": {
     "phase": "Roda contínua PRF Administrativo",
-    "cycle": "PRFADM01–PRFADM33",
+    "cycle": "Volta 1",
     "currentUnit": null,
-    "nextAction": null,
-    "nextActionKind": "manual",
-    "alerts": [
-      "Aguardando regeneração pelo sync do Notion."
-    ]
+    "nextAction": "PRFADM01 — próxima sessão confirmada na execução do Notion",
+    "nextActionKind": "operational",
+    "alerts": []
   },
   "study": {
-    "evidence": "unavailable",
+    "evidence": "confirmed",
     "sourceRef": "content/prf-notion.json#projectState.execution",
-    "updatedAt": null,
+    "updatedAt": "2026-09-29T13:43:10.655Z",
     "trail": "Roda PRFADM",
     "lastCompletedUnit": null,
-    "nextUnit": null,
+    "nextUnit": "PRFADM01",
     "lastStudiedAt": null,
     "questionsDone": null,
     "correct": null,
@@ -34,8 +32,12 @@
     "reviewsDue": null,
     "nextReviewAt": null,
     "activeErrors": null,
-    "completedSessions": null,
+    "completedSessions": 0,
     "totalSessions": 33,
-    "notes": []
+    "notes": [
+      "Materiais: 33/33",
+      "Questões editoriais: 14/33",
+      "Gate editorial: PRFADM 10/10 v2"
+    ]
   }
 }
