@@ -254,12 +254,34 @@
     } else {
       const sets = questionPagesFor(select.value);
       if (sets.length) {
+        const questionPages = [];
+        const answerPages = [];
         sets.forEach(function (page) {
+          if (/gabarito|corre[cç][aã]o|comentad/i.test(String(page.title || ""))) answerPages.push(page);
+          else questionPages.push(page);
+        });
+        questionPages.forEach(function (page) {
           const heading = document.createElement("h2");
           heading.textContent = page.title;
           documentNode.appendChild(heading);
           renderBlocks(page.blocks || [], documentNode);
         });
+        if (answerPages.length) {
+          const disclosure = document.createElement("details");
+          disclosure.className = "reader-answer-disclosure";
+          const summary = document.createElement("summary");
+          summary.textContent = "Mostrar gabarito comentado (abra depois de responder)";
+          disclosure.appendChild(summary);
+          answerPages.forEach(function (page) {
+            const heading = document.createElement("h2");
+            heading.textContent = page.title;
+            disclosure.appendChild(heading);
+            const answerContent = document.createElement("div");
+            renderBlocks(page.blocks || [], answerContent);
+            disclosure.appendChild(answerContent);
+          });
+          documentNode.appendChild(disclosure);
+        }
       } else {
         const notice = document.createElement("div");
         notice.className = "reader-question-notice";
