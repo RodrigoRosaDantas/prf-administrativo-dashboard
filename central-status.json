@@ -6,7 +6,7 @@
     "kind": "public-project-state",
     "ref": "content/prf-notion.json#projectState",
     "status": "synced",
-    "updatedAt": "2026-09-30T11:44:49.479Z"
+    "updatedAt": "2026-09-30T16:25:06.536Z"
   },
   "state": {
     "phase": "Roda contínua PRF Administrativo",
@@ -19,7 +19,7 @@
   "study": {
     "evidence": "confirmed",
     "sourceRef": "content/prf-notion.json#projectState.execution",
-    "updatedAt": "2026-09-30T11:44:49.479Z",
+    "updatedAt": "2026-09-30T16:25:06.536Z",
     "trail": "Roda PRFADM",
     "lastCompletedUnit": null,
     "nextUnit": "PRFADM01",
