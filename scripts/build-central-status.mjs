@@ -23,6 +23,15 @@ const state = {
   alerts
 };
 
+// Before the first completed session, no D7/D20 review can be due.
+// Once the cycle starts, keep the count unknown until Notion publishes it.
+const reviewsDue =
+  executionAvailable && Number.isInteger(execution.reviewsDue) && execution.reviewsDue >= 0
+    ? execution.reviewsDue
+    : executionAvailable && execution.completed === 0
+      ? 0
+      : null;
+
 const study = {
   evidence: executionAvailable ? "confirmed" : "unavailable",
   sourceRef: "content/prf-notion.json#projectState.execution",
@@ -36,7 +45,7 @@ const study = {
   errors: null,
   doubts: null,
   accuracy: null,
-  reviewsDue: null,
+  reviewsDue,
   nextReviewAt: null,
   activeErrors: null,
   completedSessions: executionAvailable ? execution.completed : null,
