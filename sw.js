@@ -1,12 +1,12 @@
 "use strict";
-const CACHE_NAME = "prf-adm-pwa-v2";
+const CACHE_NAME = "prf-adm-pwa-v3";
 const BASE_URL = new URL("./", self.location.href);
 const SHELL_FILES = [
   "./",
   "./index.html",
   "./styles.css",
   "./data.js",
-  "./reader.js",
+  "./reader.js?v=20260930-answer-disclosure-v1",
   "./app.js",
   "./app.js?v=20260929-questions-stage",
   "./pwa.js",
