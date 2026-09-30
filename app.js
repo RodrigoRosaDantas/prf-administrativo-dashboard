@@ -141,6 +141,8 @@
     const study = "O estudo real está em Volta " + executionState.round + " · " + executionState.completed + "/" + data.modules.length + ", com próximo código " + executionState.next + ".";
     if (editorialState.stage === "MATERIALS") {
       editorialCopy.textContent = editorialState.completed + " materiais passaram pelo gate " + editorialState.gate + ". " + study + " As questões começam depois dos 33 materiais.";
+    } else if (editorialState.stage === "COMPLETE") {
+      editorialCopy.textContent = "Produção editorial concluída: " + editorialState.completed + "/" + editorialState.total + " materiais e " + editorialState.questionsCompleted + "/" + editorialState.questionsTotal + " blocos de questões prontos. " + study;
     } else {
       const nextStep = editorialState.next ? " Próxima etapa editorial: " + editorialState.next + "." : " A esteira editorial está concluída.";
       editorialCopy.textContent = "Materiais: " + editorialState.completed + "/" + editorialState.total + "; questões: " + editorialState.questionsCompleted + "/" + editorialState.questionsTotal + "." + nextStep + " " + study;
@@ -167,7 +169,7 @@
       gate: gate,
       status: state.editorialStatus || state.status || "READY"
     };
-    if (materialSummary) materialSummary.textContent = completed + "/" + total + " materiais revalidados";
+    if (materialSummary) materialSummary.textContent = completed + "/" + total + (stage === "COMPLETE" ? " materiais concluídos" : " materiais revalidados");
     if (materialNext) {
       if (stage === "MATERIALS") materialNext.textContent = "Próximo editorial: " + (next || "nenhum") + " · gate " + gate;
       else if (stage === "QUESTIONS") materialNext.textContent = "Próximas questões: " + (next || "nenhuma") + " · gate " + gate;
