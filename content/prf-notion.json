@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "source": "Notion API",
-  "syncedAt": "2026-10-02T16:17:03.968Z",
+  "syncedAt": "2026-10-02T20:10:48.356Z",
   "snapshotAsOf": "2026-09-30",
   "moduleCount": 33,
   "contentBlockCount": 11798,
@@ -374392,14 +374392,15 @@
     }
   ],
   "projectState": {
-    "syncedAt": "2026-10-02T16:17:03.968Z",
+    "syncedAt": "2026-10-02T20:10:48.356Z",
     "execution": {
       "status": "available",
       "round": 1,
       "completed": 0,
       "total": 33,
       "next": "PRFADM01",
-      "lastCompleted": null
+      "lastCompleted": null,
+      "lastStudiedAt": null
     },
     "editorial": {
       "status": "available",
