@@ -188,6 +188,14 @@ function requiredMatch(text, pattern, label) {
   return match;
 }
 
+function normalizeExecutionDate(value) {
+  const raw = String(value || "").trim();
+  const iso = raw.match(/(\d{4})-(\d{2})-(\d{2})/);
+  if (iso) return `${iso[1]}-${iso[2]}-${iso[3]}`;
+  const br = raw.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+  return br ? `${br[3]}-${br[2]}-${br[1]}` : null;
+}
+
 function parseExecutionState(blocks) {
   const text = plainTextFromBlocks(blocks);
   const round = Number(requiredMatch(text, /Volta atual:\s*(?:Volta\s*)?(\d+)/i, "a volta atual")[1]);
@@ -198,6 +206,8 @@ function parseExecutionState(blocks) {
   const lastMatch = requiredMatch(text, /Último concluído:\s*(PRFADM\d{2}|nenhum)/i, "a última sessão concluída");
   const next = /^nenhum$/i.test(nextMatch[1]) ? null : nextMatch[1].toUpperCase();
   const lastCompleted = /^nenhum$/i.test(lastMatch[1]) ? null : lastMatch[1].toUpperCase();
+  const lastStudyMatch = text.match(/(?:Última execução|Data do último estudo|Último estudo(?: em)?):\s*([^\r\n]+)/i);
+  const lastStudiedAt = normalizeExecutionDate(lastStudyMatch?.[1]);
   const moduleCodes = new Set(dataSource.modules.map(module => module.code));
 
   if (!Number.isInteger(round) || round < 1 || !Number.isInteger(completed) || completed < 0 || completed > total || total !== dataSource.modules.length) {
@@ -206,7 +216,7 @@ function parseExecutionState(blocks) {
   if ((next && !moduleCodes.has(next)) || (lastCompleted && !moduleCodes.has(lastCompleted))) {
     throw new Error("O Notion indica um código PRFADM que não existe na roda.");
   }
-  return { round, completed, total, next, lastCompleted };
+  return { round, completed, total, next, lastCompleted, lastStudiedAt };
 }
 
 function parseEditorialState(blocks) {
