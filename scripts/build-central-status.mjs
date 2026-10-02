@@ -25,6 +25,23 @@ const state = {
 
 // Before the first completed session, no D7/D20 review can be due.
 // Once the cycle starts, keep the count unknown until Notion publishes it.
+const lastStudiedAt =
+  executionAvailable && typeof execution.lastStudiedAt === "string" && execution.lastStudiedAt
+    ? execution.lastStudiedAt
+    : null;
+const timeCredits =
+  executionAvailable && execution.lastCompleted && lastStudiedAt
+    ? [{
+        id: `prf-adm:study:${execution.lastCompleted}:${lastStudiedAt.slice(0, 10)}`,
+        date: lastStudiedAt.slice(0, 10),
+        kind: "study",
+        unit: execution.lastCompleted,
+        trail: "Roda PRFADM",
+        minutes: 60,
+        sourceRef: "content/prf-notion.json#projectState.execution",
+      }]
+    : [];
+
 const reviewsDue =
   executionAvailable && Number.isInteger(execution.reviewsDue) && execution.reviewsDue >= 0
     ? execution.reviewsDue
@@ -39,7 +56,7 @@ const study = {
   trail: "Roda PRFADM",
   lastCompletedUnit: executionAvailable ? execution.lastCompleted : null,
   nextUnit: executionAvailable ? execution.next : null,
-  lastStudiedAt: null,
+  lastStudiedAt,
   questionsDone: null,
   correct: null,
   errors: null,
@@ -50,6 +67,7 @@ const study = {
   activeErrors: null,
   completedSessions: executionAvailable ? execution.completed : null,
   totalSessions: executionAvailable ? execution.total : 33,
+  timeCredits,
   notes: editorialAvailable ? [
     `Materiais: ${editorial.materialsCompleted}/${editorial.materialsTotal}`,
     `Questões editoriais: ${editorial.questionsCompleted}/${editorial.questionsTotal}`,
