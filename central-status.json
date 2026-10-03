@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "projectId": "prf-adm",
-  "publishedAt": "2026-10-02",
+  "publishedAt": "2026-10-03",
   "source": {
     "kind": "public-project-state",
     "ref": "content/prf-notion.json#projectState",
     "status": "synced",
-    "updatedAt": "2026-10-02T20:10:48.356Z"
+    "updatedAt": "2026-10-03T14:44:24.509Z"
   },
   "state": {
     "phase": "Roda contínua PRF Administrativo",
@@ -19,7 +19,7 @@
   "study": {
     "evidence": "confirmed",
     "sourceRef": "content/prf-notion.json#projectState.execution",
-    "updatedAt": "2026-10-02T20:10:48.356Z",
+    "updatedAt": "2026-10-03T14:44:24.509Z",
     "trail": "Roda PRFADM",
     "lastCompletedUnit": null,
     "nextUnit": "PRFADM01",
